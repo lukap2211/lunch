@@ -525,8 +525,28 @@
 			}
 		}
 	};
+
+	var V = {
+		config : {
+		    client_id : "CLIENT_ID",
+		    client_secret : "CLIENT_SECRET",
+		    refresh_token : "REFRESH_TOKEN"
+		},
+
+		_fn : {
+			getToken : function () {
+				$.ajax
+			}
+		},
+
+		init : function () {
+			console.warn("venmo initalized!");
+		}
+	};
+
 	$(document).ready(function () {
 		L.init();
+		V.init();
 	});
 </script>
 </head>
