@@ -541,9 +541,13 @@
 				$.getJSON(V.api.proxy + V.api.me + token + "&callback=?", function(result) {
 					console.log("getting user details...");
 					V.token = token;
-					V.user = result.contents.data.user;
-					console.log(V.user);
-					V._fn.getFriends();
+					if (result.contents.data) {
+						V.user = result.contents.data.user;
+						console.log(V.user);
+						V._fn.getFriends();
+					} else {
+						console.log("NO USER! (probably token expired)");
+					}
 				});
 			},
 			getFriends : function () {
