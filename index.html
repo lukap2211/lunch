@@ -128,6 +128,11 @@
 			padding-top: 6px;
 			padding-bottom: 6px;
 		}
+		#my_friends {overflow: hidden; margin: auto; padding: 0; margin: 0;}
+		#my_friends li {float: left; list-style: none; padding: 10px;}
+		#my_friends li h3 {color:white; font-size: 10px;}
+		#my_friends li img {width: 80px; height: 80px;}
+
 	</style>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.6.1.min.js"><\/script>')</script>
@@ -537,10 +542,9 @@
 		friends 	: [],
 
 		_fn : {
-			getMe : function (token) {
-				$.getJSON(V.api.proxy + V.api.me + token + "&callback=?", function(result) {
+			getMe : function () {
+				$.getJSON(V.api.proxy + V.api.me + V.token + "&callback=?", function(result) {
 					console.log("getting user details...");
-					V.token = token;
 					if (result.contents.data) {
 						V.user = result.contents.data.user;
 						console.log(V.user);
@@ -555,12 +559,39 @@
 					console.log("getting friends...");
 					V.friends = result.contents.data;
 					console.log(V.friends);
+					V._fn.showFriends();
 				});
+			},
+
+			showFriends : function () {
+				var friends_html = [];
+				$.each(V.friends, function (i, friend) {
+
+					li_friend = [ "<li data-id='" + friend.id + "'>",
+								  "<h3>" + friend.display_name + "</h3>",
+								  "<img src='" + friend.profile_picture_url + "' title ='" + friend.display_name + "' />",
+								  "</li>"
+								].join("");
+					friends_html.push(li_friend);
+
+				});
+				$("#my_friends").append(friends_html.join(""));
+			},
+
+			getParameterByName : function (name) {
+			    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			        results = regex.exec(location.search);
+			    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 			}
 		},
 
 		init : function () {
 			console.warn("venmo initalized!");
+			if (V._fn.getParameterByName('access_token')) {
+				V.token = V._fn.getParameterByName('access_token')
+				V._fn.getMe();
+			}
 		}
 	};
 
@@ -632,5 +663,6 @@
 	</div>
 </div>
 </div>
+<div id="my_friends"></div></div>
 </body>
 </html>
