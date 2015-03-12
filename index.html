@@ -527,15 +527,31 @@
 	};
 
 	var V = {
-		config : {
-		    client_id : "CLIENT_ID",
-		    client_secret : "CLIENT_SECRET",
-		    refresh_token : "REFRESH_TOKEN"
+		api : {
+			proxy 	: "https://agile-ridge-2099.herokuapp.com/ba-simple-proxy.php?url=",
+			me 		: "https://api.venmo.com/v1/me?access_token=",
+			friends	: "https://api.venmo.com/v1/users/"
 		},
+	    token 		: "",
+		user 		: {},
+		friends 	: [],
 
 		_fn : {
-			getToken : function () {
-				$.ajax
+			getMe : function (token) {
+				$.getJSON(V.api.proxy + V.api.me + token + "&callback=?", function(result) {
+					console.log("getting user details...");
+					V.token = token;
+					V.user = result.contents.data.user;
+					console.log(V.user);
+					V._fn.getFriends();
+				});
+			},
+			getFriends : function () {
+				$.getJSON(V.api.proxy + V.api.friends + V.user.id + "/friends?access_token=" + V.token + "&callback=?", function(result) {
+					console.log("getting friends...");
+					V.friends = result.contents.data;
+					console.log(V.friends);
+				});
 			}
 		},
 
@@ -557,6 +573,7 @@
 		<h1>How Many People?</h1>
 		<input type="number" id="count" value="4" />
 		<input type="button" value="Go" id="next" />
+		<a class="venmo" href="https://api.venmo.com/v1/oauth/authorize?client_id=2437&scope=access_friends%20access_profile&response_type=token">Venmo</a>
 	</div>
 
 	<div id="step_names" class="step">
