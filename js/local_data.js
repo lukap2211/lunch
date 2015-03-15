@@ -1,24 +1,26 @@
 var LOCAL = {
 
+  "balance": "34.33",
+
   user : {
-  "username": "lukap",
-  "first_name": "Luka",
-  "last_name": "Puharic",
-  "display_name": "Luka Puharic",
-  "is_friend": false,
-  "friends_count": 3,
-  "about": "legal alien in NY",
-  "email": null,
-  "phone": null,
-  "profile_picture_url": "https://venmopics.appspot.com/u/v6/f/e5938118-4cb7-4f2c-9319-866d8c0d2d36",
-  "friend_request": {
-    "status": null
-  },
-  "trust_request": {
-    "status": null
-  },
-  "id": "1607579096580096437",
-  "date_joined": "2015-01-28T00:52:42"
+    "username": "lukap",
+    "first_name": "Luka",
+    "last_name": "Puharic",
+    "display_name": "Luka Puharic",
+    "is_friend": false,
+    "friends_count": 3,
+    "about": "legal alien in NY",
+    "email": null,
+    "phone": null,
+    "profile_picture_url": "https://venmopics.appspot.com/u/v6/f/e5938118-4cb7-4f2c-9319-866d8c0d2d36",
+    "friend_request": {
+      "status": null
+    },
+    "trust_request": {
+      "status": null
+    },
+    "id": "1607579096580096437",
+    "date_joined": "2015-01-28T00:52:42"
   },
 
   friends : [
