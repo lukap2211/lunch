@@ -1,4 +1,12 @@
-#my_friends {overflow: hidden; margin: auto; padding: 0; margin: 0;}
+
+body {padding: 10px;}
+
+#my_details {position: fixed; top:0; left:0; right:0; height: 70px; background: #333; padding:10px; z-index: 100;}
+#my_details img {width: 50px; height: 50px; margin: 0 10px 0 0;}
+#my_details .title {padding:0; margin:0;color:#EEE; padding: 0 10px; line-height:50px;}
+
+
+#my_friends {overflow: hidden; margin: auto; padding: 0; margin: 90px 0 0; }
 #my_friends li {float: left; list-style: none; padding: 10px;}
-#my_friends li h3 {color:white; font-size: 10px;}
-#my_friends li img {width: 80px; height: 80px;}
+#my_friends li img {width: 50px; height: 50px; margin: 0 10px 0 0;}
+#my_friends li .title {padding:0; margin:0;color:#555; background: #EEE; padding: 0 10px; line-height:50px; border: 1px solid #DDD;}

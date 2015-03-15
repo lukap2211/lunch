@@ -15,6 +15,7 @@ var V = {
                 if (result.contents.data) {
                     V.user = result.contents.data.user;
                     console.log(V.user);
+                    V._fn.showMyDetails();
                     V._fn.getFriends();
                 } else {
                     console.log("NO USER! (probably token expired)");
@@ -31,13 +32,27 @@ var V = {
             });
         },
 
+        showMyDetails : function () {
+            var my_details = [ "<img src='" + V.user.profile_picture_url + "' title ='" + V.user.display_name + "' class='img-circle' align='left' />",
+                               "<h3 class='title'>" + V.user.display_name + "</h3>",
+                               ].join("");
+
+             $("#my_details").append(my_details);
+        },
+
         showFriends : function () {
             var friends_html = [];
             $.each(V.friends, function (i, friend) {
 
                 li_friend = [ "<li data-id='" + friend.id + "'>",
-                              "<h3>" + friend.display_name + "</h3>",
-                              "<img src='" + friend.profile_picture_url + "' title ='" + friend.display_name + "' />",
+                              "<label>",
+                              "<img src='" + friend.profile_picture_url + "' title ='" + friend.display_name + "' class='img-circle' align='left' />",
+                              "<div class='input-group'>",
+                              "<span class='input-group-addon'>",
+                              "<input type='checkbox' aria-label='...''>",
+                              "</span>",
+                              "<h3 class='title'>" + friend.display_name + "</h3>",
+                              "</label>",
                               "</li>"
                             ].join("");
                 friends_html.push(li_friend);
@@ -51,6 +66,14 @@ var V = {
             var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
                 results = regex.exec(location.search);
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        },
+
+        getLocalData : function () {
+            V.user = LOCAL.user;
+            V.friends = LOCAL.friends;
+            V._fn.showMyDetails();
+            V._fn.showFriends();
+
         }
     },
 
@@ -59,6 +82,9 @@ var V = {
         if (V._fn.getParameterByName('access_token')) {
             V.token = V._fn.getParameterByName('access_token')
             V._fn.getMe();
+        } else {
+            // use local stored data not to exceed request limit
+            V._fn.getLocalData();
         }
     }
 };
