@@ -12,7 +12,7 @@ var LOCAL = {
     "about": "legal alien in NY",
     "email": null,
     "phone": null,
-    "profile_picture_url": "https://venmopics.appspot.com/u/v6/f/e5938118-4cb7-4f2c-9319-866d8c0d2d36",
+    "profile_picture_url": "https://venmopics.appspot.com/u/v1/s/e5938118-4cb7-4f2c-9319-866d8c0d2d36",
     "friend_request": {
       "status": null
     },
